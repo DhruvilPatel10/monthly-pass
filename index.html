@@ -1,106 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Monthly Pass</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="color.css">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#1d86d7">
-    <meta name="theme-color" content="#1d86d7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="NJ Transit">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monthly Pass</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="color.css">
+
+<meta name="theme-color" content="#1d86d7">
 </head>
 
 <body>
-    <div class="curved-background" id="main-container">
-        <div class="header">Monthly Pass</div>
-        <div class="card">
-            <div style="display: grid; justify-content: center;">
-                <div class="qr">
-                    <img class="qr-code" src="your-qr-code-image.png" id="QRCODE" alt="QR Code">
-                </div>
-                <div class="tap">Tap to enlarge</div>
-                <div style="border-bottom: 1px dashed #00000050;width: 70vw;padding: 0.2vh;"></div>
-                <div class="info">
-                    <div class="interstate">INTERSTATE</div>
-                    <table style="width: 120%;position: relative;left: -10%;">
-                        <tbody>
-                            <tr>
-                                <td style="width: 20%; text-align: center; align-content: flex-start;">
-                                    <div class="month" id="pass_month_year">APR 2026</div>
-                                </td>
-                                <td style="width: 60%; text-align: center;" rowspan="2">
-                                    <div class="zone">
-                                        <div class="number" onclick="updateZoneText()">2</div>
-                                        <div class="text">ZONE RIDE</div>
-                                    </div>
-                                </td>
-                                <td style="width: 20%; text-align: center;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+<div class="curved-background" id="main-container">
+    <div class="header">Monthly Pass</div>
+    <div class="card">
+        <div style="display: grid; justify-content: center;">
+            <div class="qr">
+                <img class="qr-code" src="your-qr-code-image.png">
             </div>
-
-            <div class="progress">
-                <div class="color-strip">
-                    <div class="color-block red"></div>
-                    <div class="color-block green"></div>
-                    <div class="color-block blue"></div>
-                </div>
-                <div class="progress-bar" style="--progress-width: 76.66666666666667%;"></div>
-                <div class="expiry">Expires in <span id="countdown">24</span> days.</div>
-                <div class="validator">View Onboard Validator Instructions</div>
+            <div class="tap">Tap to enlarge</div>
+            <div style="border-bottom: 1px dashed #00000050;width: 70vw;padding: 0.2vh;"></div>
+            <div class="info">
+                <div class="interstate">INTERSTATE</div>
+                <table style="width: 120%;position: relative;left: -10%;">
+                    <tr>
+                        <td style="width: 20%; text-align: center;">
+                            <div class="month" id="pass_month_year">APR 2026</div>
+                        </td>
+                        <td style="width: 60%; text-align: center;">
+                            <div class="zone">
+                                <div class="number" onclick="updateZoneText()">2</div>
+                                <div class="text">ZONE RIDE</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
+
+        <div class="progress">
+            <div class="color-strip">
+                <div class="color-block red"></div>
+                <div class="color-block green"></div>
+                <div class="color-block blue"></div>
+            </div>
+            <div class="progress-bar"></div>
+            <div class="expiry">Expires in <span id="countdown">24</span> days.</div>
+            <div class="validator">View Onboard Validator Instructions</div>
+        </div>
     </div>
+</div>
 
-    <script>
-        function updateMonthAndYear() {
-            var currentDate = new Date();
-            var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-            var month = monthNames[currentDate.getMonth()];
-            var year = currentDate.getFullYear();
-            var content = month + " " + year;
-            document.getElementById("pass_month_year").innerHTML = content;
-        }
+<script>
+function updateMonthAndYear() {
+    var currentDate = new Date();
+    var monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    var month = monthNames[currentDate.getMonth()];
+    var year = currentDate.getFullYear();
+    document.getElementById("pass_month_year").innerHTML = month + " " + year;
+}
 
-        function updateZoneText() {
-            const zoneElement = document.querySelector('.number');
-            let currentZone = parseInt(zoneElement.textContent, 10);
-            currentZone = currentZone === 16 ? 1 : currentZone + 1;
-            zoneElement.textContent = currentZone;
-        }
+function updateZoneText() {
+    const zoneElement = document.querySelector('.number');
+    let currentZone = parseInt(zoneElement.textContent, 10);
+    currentZone = currentZone === 16 ? 1 : currentZone + 1;
+    zoneElement.textContent = currentZone;
+}
 
-        function updateCountdown() {
-            const countdown = document.getElementById('countdown');
-            const currentDate = new Date();
-            const currentMonth = currentDate.getMonth();
-            const deadlineDate = new Date(currentDate.getFullYear(), currentMonth + 1, 1);
+function updateCountdown() {
+    const countdown = document.getElementById('countdown');
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const deadlineDate = new Date(currentDate.getFullYear(), currentMonth + 1, 1);
 
-            const timeRemaining = deadlineDate - currentDate;
-            const remainingDays = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
+    const timeRemaining = deadlineDate - currentDate;
+    const remainingDays = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
 
-            const totalDaysInMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 0).getDate();
-            const daysPassed = currentDate.getDate();
-            const progressPercentage = (daysPassed / totalDaysInMonth) * 100;
+    const totalDaysInMonth = new Date(currentDate.getFullYear(), currentMonth + 1, 0).getDate();
+    const daysPassed = currentDate.getDate();
+    const progressPercentage = (daysPassed / totalDaysInMonth) * 100;
 
-            countdown.textContent = `${remainingDays.toString()}`;
-            document.querySelector('.progress-bar').style.setProperty('--progress-width', `${100 - progressPercentage}%`);
-        }
+    countdown.textContent = remainingDays;
+    document.querySelector('.progress-bar').style.setProperty('--progress-width', `${100 - progressPercentage}%`);
+}
 
-        document.querySelector('meta[name="theme-color"]').setAttribute("content", "#1d86d7");
-        updateMonthAndYear();
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    </script>
+function applyDailyTheme() {
+    const themes = [
+        { first:"#999999", stripone:"#E971A3", striptwo:"#E534F9", stripthree:"#B890EC" },
+        { first:"#ff6666", stripone:"#5f6b73", striptwo:"#5fe3e3", stripthree:"#ff6666" },
+        { first:"#fbe00a", stripone:"#ff6269", striptwo:"#2995ff", stripthree:"#d591ce" },
+        { first:"#76B877", stripone:"#ffd1db", striptwo:"#2995ff", stripthree:"#a6a6a6" },
+        { first:"#7f8c8d", stripone:"#2ecc71", striptwo:"#3498db", stripthree:"#9b59b6" },
+        { first:"#ff8c42", stripone:"#e63946", striptwo:"#f1fa8c", stripthree:"#457b9d" },
+        { first:"#8d99ae", stripone:"#ef476f", striptwo:"#06d6a0", stripthree:"#118ab2" }
+    ];
+
+    const today = new Date();
+    const index = today.getDate() % themes.length;
+    const theme = themes[index];
+
+    document.documentElement.style.setProperty('--first', theme.first);
+    document.documentElement.style.setProperty('--stripone', theme.stripone);
+    document.documentElement.style.setProperty('--striptwo', theme.striptwo);
+    document.documentElement.style.setProperty('--stripthree', theme.stripthree);
+}
+
+updateMonthAndYear();
+updateCountdown();
+applyDailyTheme();
+setInterval(updateCountdown, 1000);
+</script>
+
 </body>
 </html>
