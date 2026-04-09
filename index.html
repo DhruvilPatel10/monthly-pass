@@ -15,26 +15,34 @@
 <body>
 <div class="curved-background" id="main-container">
     <div class="header">Monthly Pass</div>
+
     <div class="card">
         <div style="display: grid; justify-content: center;">
+
             <div class="qr">
                 <img class="qr-code" src="your-qr-code-image.png">
             </div>
+
             <div class="tap">Tap to enlarge</div>
             <div style="border-bottom: 1px dashed #00000050;width: 70vw;padding: 0.2vh;"></div>
+
             <div class="info">
                 <div class="interstate">INTERSTATE</div>
-                <table style="width: 120%;position: relative;left: -10%;">
+
+                <table style="width: 100%; table-layout: fixed; margin-top: 10px;">
                     <tr>
-                        <td style="width: 20%; text-align: center;">
+                        <td style="width: 22%; text-align: center;">
                             <div class="month" id="pass_month_year">APR 2026</div>
                         </td>
-                        <td style="width: 60%; text-align: center;">
+
+                        <td style="width: 56%; text-align: center;">
                             <div class="zone">
                                 <div class="number" onclick="updateZoneText()">2</div>
                                 <div class="text">ZONE RIDE</div>
                             </div>
                         </td>
+
+                        <td style="width: 22%;"></td>
                     </tr>
                 </table>
             </div>
@@ -46,9 +54,16 @@
                 <div class="color-block green"></div>
                 <div class="color-block blue"></div>
             </div>
+
             <div class="progress-bar"></div>
-            <div class="expiry">Expires in <span id="countdown">24</span> days.</div>
-            <div class="validator">View Onboard Validator Instructions</div>
+
+            <div class="expiry">
+                Expires in <span id="countdown">24</span> days.
+            </div>
+
+            <div class="validator">
+                View Onboard Validator Instructions
+            </div>
         </div>
     </div>
 </div>
@@ -83,7 +98,8 @@ function updateCountdown() {
     const progressPercentage = (daysPassed / totalDaysInMonth) * 100;
 
     countdown.textContent = remainingDays;
-    document.querySelector('.progress-bar').style.setProperty('--progress-width', `${100 - progressPercentage}%`);
+    document.querySelector('.progress-bar')
+        .style.setProperty('--progress-width', `${100 - progressPercentage}%`);
 }
 
 function applyDailyTheme() {
